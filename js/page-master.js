@@ -1,0 +1,52 @@
+/* ============================================================
+   Halaman master data: Lokasi dan Jenis Lampu
+   ============================================================ */
+
+Pages.lokasi = buatHalamanCrud({
+  table: 'lokasi',
+  judul: 'Lokasi',
+  tunggal: 'lokasi',
+  urut: ['gedung', 'lantai', 'ruang'],
+  bantuan: 'Tempat fitting dipasang. Contoh: <b>Gedung A</b> › Lantai <b>2</b> › Ruang <b>Kelas 2B</b>.',
+  fields: [
+    { key: 'gedung', label: 'Area / Gedung', required: true, placeholder: 'mis. Gedung A, Masjid, Asrama Putra' },
+    { key: 'lantai', label: 'Lantai', placeholder: 'mis. 1, 2, Dasar' },
+    { key: 'ruang', label: 'Ruang', placeholder: 'mis. Kelas 2B, Koridor, Kamar mandi' },
+    { key: 'keterangan', label: 'Keterangan', type: 'textarea' },
+  ],
+  kolom: [
+    { key: 'gedung', label: 'Gedung' },
+    { key: 'lantai', label: 'Lantai' },
+    { key: 'ruang', label: 'Ruang' },
+    { key: 'keterangan', label: 'Keterangan' },
+  ],
+  ringkas: (r) => labelLokasi(r),
+  peringatanHapus: 'Fitting di lokasi ini tidak ikut terhapus, hanya lokasinya jadi kosong.',
+});
+
+Pages.jenis = buatHalamanCrud({
+  table: 'jenis_lampu',
+  judul: 'Jenis Lampu',
+  tunggal: 'jenis lampu',
+  urut: ['merk', 'jenis', 'watt'],
+  bantuan: 'Daftar merk/jenis lampu yang dipakai. <b>Masa pakai wajar</b> dipakai untuk menandai lampu yang rusak lebih cepat dari seharusnya.',
+  fields: [
+    { key: 'merk', label: 'Merk', required: true, placeholder: 'mis. Philips, Hannochs' },
+    { key: 'jenis', label: 'Jenis', required: true, saran: ['LED', 'TL / Neon', 'CFL (hemat energi)', 'Pijar', 'Halogen', 'Lampu sorot'] },
+    { key: 'watt', label: 'Daya (watt)', type: 'number', min: 1 },
+    {
+      key: 'masa_pakai_jam', label: 'Masa pakai wajar (jam nyala)', type: 'number', min: 1,
+      bantuan: 'Lihat tulisan di kemasan. Umumnya: LED 15.000–25.000 jam, TL 6.000–10.000, CFL 6.000–8.000, pijar 1.000.',
+    },
+    { key: 'keterangan', label: 'Keterangan', type: 'textarea' },
+  ],
+  kolom: [
+    { key: 'merk', label: 'Merk' },
+    { key: 'jenis', label: 'Jenis' },
+    { key: 'watt', label: 'Watt', fmt: (r) => r.watt ?? '' },
+    { key: 'masa_pakai_jam', label: 'Masa pakai (jam)', fmt: (r) => r.masa_pakai_jam ? r.masa_pakai_jam.toLocaleString('id-ID') : '' },
+    { key: 'keterangan', label: 'Keterangan' },
+  ],
+  ringkas: (r) => labelJenis(r),
+  peringatanHapus: 'Fitting yang memakai jenis ini tidak ikut terhapus, hanya jenis lampunya jadi kosong.',
+});

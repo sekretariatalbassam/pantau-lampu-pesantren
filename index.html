@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0f766e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Pantau Lampu">
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- Versi 2.4 - Deploy Ready -->
+  <title>Pantau Lampu Pesantren — Pesantren Tahfizh Al-Bassam</title>
+  
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>">
+  <link rel="stylesheet" href="css/style.css?v=2.3">
+</head>
+<body>
+
+  <!-- ===== Halaman Login ===== -->
+  <div id="login-view" hidden>
+    <div class="login-wrapper">
+      <form id="login-form" class="card login-card">
+        <div class="login-logo-circle">
+          <span>💡</span>
+        </div>
+        <h1 id="login-judul">Pantau Lampu</h1>
+        <p class="muted" id="login-lembaga">Pesantren Tahfizh Al-Bassam</p>
+        
+        <label class="field">
+          <span>Email Pengurus / Teknisi</span>
+          <input type="email" id="login-email" autocomplete="username" inputmode="email" placeholder="mis. ustadz@albassam.id">
+        </label>
+        
+        <label class="field">
+          <span>Password</span>
+          <input type="password" id="login-password" autocomplete="current-password" placeholder="••••••••">
+        </label>
+        
+        <p id="login-error" class="error-text" hidden></p>
+        
+        <button class="btn primary block touch-btn" type="submit" id="login-btn">Masuk Akun</button>
+        
+        <div class="divider"><span>atau coba langsung</span></div>
+        
+        <button class="btn success block touch-btn" type="button" id="btn-demo-mode">
+          ⚡ Buka Mode Simulasi Pesantren
+        </button>
+        <small class="muted" style="display:block;margin-top:10px;font-size:0.8rem;">
+          Bisa langsung dicoba di HP tanpa konfigurasi database.
+        </small>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Tampilan Aplikasi Mobile ===== -->
+  <div id="app-view" hidden>
+    <!-- Topbar Compact Mobile -->
+    <header class="topbar no-print">
+      <div class="brand">
+        <div class="brand-title">
+          <span class="brand-icon">💡</span>
+          <strong id="brand-nama">Pantau Lampu</strong>
+        </div>
+        <small id="brand-lembaga">Pesantren Tahfizh Al-Bassam</small>
+      </div>
+      <div class="user-box">
+        <span id="nama-user" class="user-badge"></span>
+        <button class="btn-icon-top" id="btn-keluar" type="button" title="Keluar / Ganti Akun">🚪</button>
+      </div>
+    </header>
+
+    <!-- Menu Navigasi Desktop / Tablet (Tampil di Layar PC/Laptop) -->
+    <nav class="desktop-nav no-print" id="desktop-nav">
+      <a href="#/beranda" data-page="beranda"><span>📊</span> <span>Beranda</span></a>
+      <a href="#/scan" data-page="scan"><span>📷</span> <span>Pindai QR</span></a>
+      <a href="#/fitting" data-page="fitting"><span>💡</span> <span>Fitting</span></a>
+      <a href="#/penggantian" data-page="penggantian"><span>🔧</span> <span>Ganti & Evaluasi</span></a>
+      <a href="#/stok" data-page="stok"><span>📦</span> <span>Stok Gudang</span></a>
+      <a href="#/label" data-page="label"><span>🏷️</span> <span>Cetak 12 Label A4</span></a>
+      <a href="#/laporan" data-page="laporan"><span>📈</span> <span>Laporan & WA</span></a>
+      <a href="#/lokasi" data-page="lokasi"><span>🏛️</span> <span>Master Lokasi</span></a>
+      <a href="#/jenis" data-page="jenis"><span>💡</span> <span>Jenis Lampu</span></a>
+    </nav>
+
+    <!-- Konten Halaman Aktif -->
+    <main id="page"></main>
+
+    <!-- Bottom Navigation Bar Khusus Mobile -->
+    <nav class="bottom-nav no-print" id="bottom-nav">
+      <a href="#/beranda" class="bnav-item" data-page="beranda">
+        <span class="bnav-icon">📊</span>
+        <span class="bnav-label">Beranda</span>
+      </a>
+
+      <a href="#/fitting" class="bnav-item" data-page="fitting">
+        <span class="bnav-icon">💡</span>
+        <span class="bnav-label">Fitting</span>
+      </a>
+
+      <!-- Tombol Pindai QR Tengah Menonjol (FAB) -->
+      <a href="#/scan" class="bnav-scan-fab" data-page="scan" title="Pindai QR Code">
+        <div class="fab-circle">
+          <span class="fab-icon">📷</span>
+        </div>
+        <span class="bnav-label">Pindai QR</span>
+      </a>
+
+      <a href="#/penggantian" class="bnav-item" data-page="penggantian">
+        <span class="bnav-icon">🔧</span>
+        <span class="bnav-label">Ganti</span>
+      </a>
+
+      <button type="button" class="bnav-item" id="btn-menu-drawer">
+        <span class="bnav-icon">📑</span>
+        <span class="bnav-label">Menu</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Bottom Sheet Menu Lainnya -->
+  <div id="menu-drawer-backdrop" class="drawer-backdrop" hidden>
+    <div class="drawer-sheet">
+      <div class="drawer-handle-bar"></div>
+      <div class="drawer-header">
+        <h3>Menu Aplikasi</h3>
+        <button class="btn-close" id="btn-close-drawer" type="button">&times;</button>
+      </div>
+      <div class="drawer-grid">
+        <a href="#/stok" class="drawer-item" data-page="stok">
+          <div class="drawer-icon-wrap" style="background:#e0f2fe;color:#0369a1;">📦</div>
+          <div class="drawer-text">
+            <strong>Stok Gudang</strong>
+            <small>Masuk, keluar, dan sisa stok</small>
+          </div>
+        </a>
+
+        <a href="#/laporan" class="drawer-item" data-page="laporan">
+          <div class="drawer-icon-wrap" style="background:#dcfce7;color:#15803d;">📈</div>
+          <div class="drawer-text">
+            <strong>Laporan & WhatsApp</strong>
+            <small>Grafik analitik & salin rekap WA</small>
+          </div>
+        </a>
+
+        <a href="#/label" class="drawer-item" data-page="label">
+          <div class="drawer-icon-wrap" style="background:#fef3c7;color:#b45309;">🏷️</div>
+          <div class="drawer-text">
+            <strong>Cetak 12 Label A4</strong>
+            <small>Format stiker QR 3x4 pas A4</small>
+          </div>
+        </a>
+
+        <a href="#/lokasi" class="drawer-item" data-page="lokasi">
+          <div class="drawer-icon-wrap" style="background:#f3e8ff;color:#7e22ce;">🏛️</div>
+          <div class="drawer-text">
+            <strong>Master Lokasi</strong>
+            <small>Gedung, lantai, dan ruang</small>
+          </div>
+        </a>
+
+        <a href="#/jenis" class="drawer-item" data-page="jenis">
+          <div class="drawer-icon-wrap" style="background:#ffe4e6;color:#be123c;">💡</div>
+          <div class="drawer-text">
+            <strong>Master Jenis Lampu</strong>
+            <small>Merk, watt, dan masa pakai</small>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kotak Toast Notifikasi Mobile -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Pustaka Eksternal CDN (QR Generator, QR Camera Scanner, Chart.js, Supabase) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Skrip Modul Aplikasi (v2.3 Cache-Busting) -->
+  <script src="js/config.js?v=2.3"></script>
+  <script src="js/app.js?v=2.3"></script>
+  <script src="js/data-store.js?v=2.3"></script>
+  <script src="js/crud.js?v=2.3"></script>
+  <script src="js/page-beranda.js?v=2.3"></script>
+  <script src="js/page-scan.js?v=2.3"></script>
+  <script src="js/page-fitting.js?v=2.3"></script>
+  <script src="js/page-penggantian.js?v=2.3"></script>
+  <script src="js/page-stok.js?v=2.3"></script>
+  <script src="js/page-label.js?v=2.3"></script>
+  <script src="js/page-laporan.js?v=2.3"></script>
+  <script src="js/page-master.js?v=2.3"></script>
+
+  <!-- Inisialisasi Aplikasi Setelah Seluruh Modul Siap -->
+  <script>
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', () => { init(); });
+    } else {
+      init();
+    }
+  </script>
+</body>
+</html>
