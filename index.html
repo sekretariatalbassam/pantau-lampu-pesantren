@@ -8,12 +8,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Pantau Lampu">
   <meta name="mobile-web-app-capable" content="yes">
-  <!-- Versi 2.4 - Deploy Ready -->
+  <!-- Versi 3.0 - Data Bersih Siap Pakai -->
   <title>Pantau Lampu Pesantren — Pesantren Tahfizh Al-Bassam</title>
   
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>">
-  <link rel="stylesheet" href="css/style.css?v=2.3">
+  <link rel="stylesheet" href="css/style.css?v=3.0">
 </head>
 <body>
 
@@ -41,13 +41,13 @@
         
         <button class="btn primary block touch-btn" type="submit" id="login-btn">Masuk Akun</button>
         
-        <div class="divider"><span>atau coba langsung</span></div>
+        <div class="divider"><span>atau</span></div>
         
         <button class="btn success block touch-btn" type="button" id="btn-demo-mode">
-          ⚡ Buka Mode Simulasi Pesantren
+          🚀 Masuk Aplikasi (Siap Pakai)
         </button>
         <small class="muted" style="display:block;margin-top:10px;font-size:0.8rem;">
-          Bisa langsung dicoba di HP tanpa konfigurasi database.
+          Langsung gunakan di HP atau laptop untuk mengelola data lampu pesantren.
         </small>
       </form>
     </div>
@@ -166,6 +166,14 @@
             <small>Merk, watt, dan masa pakai</small>
           </div>
         </a>
+
+        <div class="drawer-item" id="btn-drawer-reset" style="cursor:pointer;">
+          <div class="drawer-icon-wrap" style="background:#fee2e2;color:#b91c1c;">🧹</div>
+          <div class="drawer-text">
+            <strong style="color:#b91c1c;">Bersihkan Data Transaksi</strong>
+            <small>Kosongkan fitting & stok untuk mulai dari nol</small>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -179,19 +187,19 @@
   <script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
-  <!-- Skrip Modul Aplikasi (v2.3 Cache-Busting) -->
-  <script src="js/config.js?v=2.3"></script>
-  <script src="js/app.js?v=2.3"></script>
-  <script src="js/data-store.js?v=2.3"></script>
-  <script src="js/crud.js?v=2.3"></script>
-  <script src="js/page-beranda.js?v=2.3"></script>
-  <script src="js/page-scan.js?v=2.3"></script>
-  <script src="js/page-fitting.js?v=2.3"></script>
-  <script src="js/page-penggantian.js?v=2.3"></script>
-  <script src="js/page-stok.js?v=2.3"></script>
-  <script src="js/page-label.js?v=2.3"></script>
-  <script src="js/page-laporan.js?v=2.3"></script>
-  <script src="js/page-master.js?v=2.3"></script>
+  <!-- Skrip Modul Aplikasi (v3.0 Data Bersih) -->
+  <script src="js/config.js?v=3.0"></script>
+  <script src="js/app.js?v=3.0"></script>
+  <script src="js/data-store.js?v=3.0"></script>
+  <script src="js/crud.js?v=3.0"></script>
+  <script src="js/page-beranda.js?v=3.0"></script>
+  <script src="js/page-scan.js?v=3.0"></script>
+  <script src="js/page-fitting.js?v=3.0"></script>
+  <script src="js/page-penggantian.js?v=3.0"></script>
+  <script src="js/page-stok.js?v=3.0"></script>
+  <script src="js/page-label.js?v=3.0"></script>
+  <script src="js/page-laporan.js?v=3.0"></script>
+  <script src="js/page-master.js?v=3.0"></script>
 
   <!-- Inisialisasi Aplikasi Setelah Seluruh Modul Siap -->
   <script>

@@ -5,150 +5,35 @@
 
 const SEED_DATA = {
   lokasi: [
-    { id: 1, gedung: 'Asrama Putra', lantai: '1', ruang: 'Kamar 101 (Abu Bakar)', keterangan: 'Kamar santri putra' },
-    { id: 2, gedung: 'Asrama Putra', lantai: '1', ruang: 'Kamar 102 (Umar)', keterangan: 'Kamar santri putra' },
-    { id: 3, gedung: 'Asrama Putra', lantai: '2', ruang: 'Kamar 201 (Utsman)', keterangan: 'Kamar santri putra lt. 2' },
-    { id: 4, gedung: 'Asrama Putra', lantai: '2', ruang: 'Kamar 202 (Ali)', keterangan: 'Kamar santri putra lt. 2 (Area Rawan)' },
-    { id: 5, gedung: 'Asrama Putra', lantai: '1', ruang: 'Kamar Mandi & Wudhu Putra', keterangan: 'Area lembap/basah' },
-    { id: 6, gedung: 'Asrama Putra', lantai: '2', ruang: 'Koridor & Selasar Lt. 2', keterangan: 'Area lalu lalang santri' },
-    { id: 7, gedung: 'Masjid Jami', lantai: '1', ruang: 'Ruang Utama Sholat', keterangan: 'Lampu gantung & plafon' },
-    { id: 8, gedung: 'Masjid Jami', lantai: '1', ruang: 'Teras & Selasar Depan', keterangan: 'Area outdoor terlindung' },
+    { id: 1, gedung: 'Masjid Jami', lantai: '1', ruang: 'Ruang Sholat Utama', keterangan: 'Area ibadah santri & asatidz' },
+    { id: 2, gedung: 'Masjid Jami', lantai: '1', ruang: 'Teras & Tempat Wudhu', keterangan: 'Area wudhu & selasar luar' },
+    { id: 3, gedung: 'Asrama Putra', lantai: '1', ruang: 'Kamar Abu Bakar (101)', keterangan: 'Kamar santri putra' },
+    { id: 4, gedung: 'Asrama Putra', lantai: '1', ruang: 'Kamar Umar (102)', keterangan: 'Kamar santri putra' },
+    { id: 5, gedung: 'Asrama Putra', lantai: '2', ruang: 'Kamar Utsman (201)', keterangan: 'Kamar santri putra lt. 2' },
+    { id: 6, gedung: 'Asrama Putra', lantai: '2', ruang: 'Kamar Ali (202)', keterangan: 'Kamar santri putra lt. 2' },
+    { id: 7, gedung: 'Asrama Putra', lantai: '1', ruang: 'Kamar Mandi & Toilet Putra', keterangan: 'Fasilitas santri' },
+    { id: 8, gedung: 'Asrama Putra', lantai: '2', ruang: 'Koridor & Selasar Lt. 2', keterangan: 'Area lalu lalang santri' },
     { id: 9, gedung: 'Madrasah', lantai: '1', ruang: 'Kelas 1 Tahfizh', keterangan: 'Ruang belajar' },
     { id: 10, gedung: 'Madrasah', lantai: '1', ruang: 'Kelas 2 Tahfizh', keterangan: 'Ruang belajar' },
     { id: 11, gedung: 'Madrasah', lantai: '2', ruang: 'Kelas 3 Tahfizh', keterangan: 'Ruang belajar' },
-    { id: 12, gedung: 'Asrama Putri', lantai: '1', ruang: 'Kamar Khadijah', keterangan: 'Kamar santriwati' }
+    { id: 12, gedung: 'Asrama Putri', lantai: '1', ruang: 'Kamar Khadijah', keterangan: 'Kamar santriwati' },
+    { id: 13, gedung: 'Kantor', lantai: '1', ruang: 'Ruang Asatidz & Pengurus', keterangan: 'Ruang administrasi pesantren' },
+    { id: 14, gedung: 'Dapur & Makan', lantai: '1', ruang: 'Ruang Makan Santri', keterangan: 'Area konsumsi' }
   ],
   jenis_lampu: [
-    { id: 1, merk: 'Philips', jenis: 'LED MyCare', watt: 14, masa_pakai_jam: 15000, keterangan: 'Tahan lama, cahaya putih terang' },
-    { id: 2, merk: 'Philips', jenis: 'LED MyCare', watt: 10, masa_pakai_jam: 15000, keterangan: 'Untuk kamar tidur santri' },
-    { id: 3, merk: 'Hannochs', jenis: 'Premier LED', watt: 12, masa_pakai_jam: 10000, keterangan: 'Ekonomis, untuk kelas' },
-    { id: 4, merk: 'Hannochs', jenis: 'Vario LED', watt: 9, masa_pakai_jam: 8000, keterangan: 'Untuk koridor & selasar' },
-    { id: 5, merk: 'Osram', jenis: 'LED Value', watt: 12, masa_pakai_jam: 12000, keterangan: 'Untuk teras dan selasar' },
-    { id: 6, merk: 'In-Lite', jenis: 'LED Bulb', watt: 11, masa_pakai_jam: 10000, keterangan: 'Alternatif hemat' }
+    { id: 1, merk: 'Philips', jenis: 'LED MyCare Bulb', watt: 10, masa_pakai_jam: 15000, keterangan: 'Hemat energi, standar kamar & lorong' },
+    { id: 2, merk: 'Philips', jenis: 'LED MyCare Bulb', watt: 14, masa_pakai_jam: 15000, keterangan: 'Cahaya putih terang, untuk kelas & masjid' },
+    { id: 3, merk: 'Philips', jenis: 'LED Bulb High Lumen', watt: 19, masa_pakai_jam: 15000, keterangan: 'Penerangan luas plafon tinggi' },
+    { id: 4, merk: 'Hannochs', jenis: 'Premier LED', watt: 12, masa_pakai_jam: 10000, keterangan: 'Ekonomis & awet untuk ruang kelas' },
+    { id: 5, merk: 'Hannochs', jenis: 'Vario LED', watt: 9, masa_pakai_jam: 8000, keterangan: 'Cocok untuk kamar mandi & selasar' },
+    { id: 6, merk: 'Osram', jenis: 'LED Value', watt: 12, masa_pakai_jam: 12000, keterangan: 'Alternatif standar ruang belajar' }
   ],
-  fitting: [
-    { id: 1, kode: 'F-001', lokasi_id: 1, jenis_lampu_id: 2, tanggal_pasang: '2026-05-10', pemasang: 'Ust. Ahmad', status: 'aktif', keterangan: 'Tengah plafon' },
-    { id: 2, kode: 'F-002', lokasi_id: 1, jenis_lampu_id: 2, tanggal_pasang: '2026-05-10', pemasang: 'Ust. Ahmad', status: 'aktif', keterangan: 'Dekat pintu masuk' },
-    { id: 3, kode: 'F-003', lokasi_id: 2, jenis_lampu_id: 2, tanggal_pasang: '2026-06-15', pemasang: 'Pak Joko (Teknisi)', status: 'aktif', keterangan: 'Tengah plafon' },
-    { id: 4, kode: 'F-004', lokasi_id: 4, jenis_lampu_id: 4, tanggal_pasang: '2026-10-02', pemasang: 'Ust. Ahmad', status: 'kosong', keterangan: 'Lampu pecah dilempar bantal santri' },
-    { id: 5, kode: 'F-005', lokasi_id: 4, jenis_lampu_id: 4, tanggal_pasang: '2026-09-20', pemasang: 'Ust. Ahmad', status: 'aktif', keterangan: 'Pojok belakang lemari' },
-    { id: 6, kode: 'F-006', lokasi_id: 6, jenis_lampu_id: 4, tanggal_pasang: '2026-08-11', pemasang: 'Pak Joko', status: 'aktif', keterangan: 'Lampu selasar lantai 2' },
-    { id: 7, kode: 'F-007', lokasi_id: 5, jenis_lampu_id: 3, tanggal_pasang: '2026-09-01', pemasang: 'Pak Joko', status: 'kosong', keterangan: 'Fiting kena tetesan air bocor' },
-    { id: 8, kode: 'F-008', lokasi_id: 5, jenis_lampu_id: 3, tanggal_pasang: '2026-07-10', pemasang: 'Pak Joko', status: 'aktif', keterangan: 'Area wudhu' },
-    { id: 9, kode: 'F-009', lokasi_id: 7, jenis_lampu_id: 1, tanggal_pasang: '2026-01-15', pemasang: 'Pak Joko', status: 'aktif', keterangan: 'Plafon imam masjid' },
-    { id: 10, kode: 'F-010', lokasi_id: 7, jenis_lampu_id: 1, tanggal_pasang: '2026-01-15', pemasang: 'Pak Joko', status: 'aktif', keterangan: 'Shaf depan tengah' },
-    { id: 11, kode: 'F-011', lokasi_id: 8, jenis_lampu_id: 5, tanggal_pasang: '2026-03-20', pemasang: 'Ust. Ahmad', status: 'aktif', keterangan: 'Teras depan masjid' },
-    { id: 12, kode: 'F-012', lokasi_id: 9, jenis_lampu_id: 3, tanggal_pasang: '2026-04-05', pemasang: 'Ust. Ridwan', status: 'aktif', keterangan: 'Papan tulis kelas 1' },
-    { id: 13, kode: 'F-013', lokasi_id: 9, jenis_lampu_id: 3, tanggal_pasang: '2026-04-05', pemasang: 'Ust. Ridwan', status: 'aktif', keterangan: 'Tengah kelas 1' },
-    { id: 14, kode: 'F-014', lokasi_id: 10, jenis_lampu_id: 3, tanggal_pasang: '2026-04-05', pemasang: 'Ust. Ridwan', status: 'aktif', keterangan: 'Kelas 2 tahfizh' },
-    { id: 15, kode: 'F-015', lokasi_id: 11, jenis_lampu_id: 3, tanggal_pasang: '2026-04-05', pemasang: 'Ust. Ridwan', status: 'aktif', keterangan: 'Kelas 3 tahfizh' },
-    { id: 16, kode: 'F-016', lokasi_id: 12, jenis_lampu_id: 2, tanggal_pasang: '2026-02-14', pemasang: 'Usth. Sarah', status: 'aktif', keterangan: 'Kamar asrama putri' },
-    { id: 17, kode: 'F-017', lokasi_id: 3, jenis_lampu_id: 2, tanggal_pasang: '2026-06-10', pemasang: 'Ust. Ahmad', status: 'aktif', keterangan: 'Kamar 201' },
-    { id: 18, kode: 'F-018', lokasi_id: 6, jenis_lampu_id: 4, tanggal_pasang: '2026-07-22', pemasang: 'Pak Joko', status: 'aktif', keterangan: 'Balkon asrama putra' },
-    { id: 19, kode: 'F-019', lokasi_id: 7, jenis_lampu_id: 1, tanggal_pasang: '2026-01-15', pemasang: 'Pak Joko', status: 'aktif', keterangan: 'Shaf belakang masjid' },
-    { id: 20, kode: 'F-020', lokasi_id: 8, jenis_lampu_id: 5, tanggal_pasang: '2026-03-20', pemasang: 'Ust. Ahmad', status: 'aktif', keterangan: 'Selasar samping masjid' }
-  ],
-  stok_mutasi: [
-    { id: 1, tanggal: '2026-01-10', jenis_lampu_id: 1, arah: 'masuk', jumlah: 20, keterangan: 'Pembelian stok awal tahun (Toko Listrik Berkah)', dibuat_oleh: 'Admin' },
-    { id: 2, tanggal: '2026-01-10', jenis_lampu_id: 2, arah: 'masuk', jumlah: 30, keterangan: 'Pembelian stok awal tahun', dibuat_oleh: 'Admin' },
-    { id: 3, tanggal: '2026-01-10', jenis_lampu_id: 3, arah: 'masuk', jumlah: 25, keterangan: 'Pembelian stok awal tahun', dibuat_oleh: 'Admin' },
-    { id: 4, tanggal: '2026-01-10', jenis_lampu_id: 4, arah: 'masuk', jumlah: 20, keterangan: 'Pembelian stok awal tahun', dibuat_oleh: 'Admin' },
-    { id: 5, tanggal: '2026-01-10', jenis_lampu_id: 5, arah: 'masuk', jumlah: 15, keterangan: 'Pembelian stok awal tahun', dibuat_oleh: 'Admin' },
-    { id: 6, tanggal: '2026-01-15', jenis_lampu_id: 1, arah: 'keluar', jumlah: 3, keterangan: 'Pemasangan Masjid F-009, F-010, F-019', dibuat_oleh: 'Pak Joko' },
-    { id: 7, tanggal: '2026-05-10', jenis_lampu_id: 2, arah: 'keluar', jumlah: 4, keterangan: 'Pemasangan Asrama Putra F-001, F-002', dibuat_oleh: 'Ust. Ahmad' },
-    { id: 8, tanggal: '2026-08-15', jenis_lampu_id: 4, arah: 'masuk', jumlah: 10, keterangan: 'Droping tambahan dari donatur', dibuat_oleh: 'Admin' },
-    { id: 9, tanggal: '2026-09-20', jenis_lampu_id: 4, arah: 'keluar', jumlah: 2, keterangan: 'Ganti lampu selasar & kamar 202', dibuat_oleh: 'Ust. Ahmad' },
-    { id: 10, tanggal: '2026-10-02', jenis_lampu_id: 4, arah: 'keluar', jumlah: 1, keterangan: 'Penggantian lampu pecah di F-004', dibuat_oleh: 'Ust. Ahmad' }
-  ],
-  penggantian: [
-    {
-      id: 1,
-      fitting_id: 4,
-      tanggal: '2026-07-15',
-      alasan: 'dimainkan_santri',
-      catatan: 'Lampu pecah tersenggol bantal saat santri bercanda di kamar',
-      jenis_lama_id: 4,
-      jenis_baru_id: 4,
-      tanggal_pasang_lama: '2026-05-10',
-      usia_hari: 66,
-      rusak_dini: true,
-      indikasi_santri: true,
-      pemasang: 'Ust. Ahmad'
-    },
-    {
-      id: 2,
-      fitting_id: 4,
-      tanggal: '2026-10-02',
-      alasan: 'dimainkan_santri',
-      catatan: 'Lampu copot dan fiting kendur, santri memasang kabel rakitan kipas angin',
-      jenis_lama_id: 4,
-      jenis_baru_id: 4,
-      tanggal_pasang_lama: '2026-07-15',
-      usia_hari: 79,
-      rusak_dini: true,
-      indikasi_santri: true,
-      pemasang: 'Ust. Ahmad'
-    },
-    {
-      id: 3,
-      fitting_id: 6,
-      tanggal: '2026-08-11',
-      alasan: 'hilang',
-      catatan: 'Lampu di selasar hilang, kemungkinan dipindahkan santri ke kamar',
-      jenis_lama_id: 4,
-      jenis_baru_id: 4,
-      tanggal_pasang_lama: '2026-03-01',
-      usia_hari: 163,
-      rusak_dini: false,
-      indikasi_santri: true,
-      pemasang: 'Pak Joko'
-    },
-    {
-      id: 4,
-      fitting_id: 7,
-      tanggal: '2026-09-01',
-      alasan: 'konslet',
-      catatan: 'Kamar mandi lembap dan atap bocor menetes ke fiting sehingga putus',
-      jenis_lama_id: 3,
-      jenis_baru_id: 3,
-      tanggal_pasang_lama: '2026-04-10',
-      usia_hari: 144,
-      rusak_dini: true,
-      indikasi_santri: false,
-      pemasang: 'Pak Joko'
-    },
-    {
-      id: 5,
-      fitting_id: 11,
-      tanggal: '2026-09-15',
-      alasan: 'habis_masa_pakai',
-      catatan: 'Lampu meredup lalu padam wajar setelah pemakaian lama',
-      jenis_lama_id: 5,
-      jenis_baru_id: 5,
-      tanggal_pasang_lama: '2025-06-10',
-      usia_hari: 462,
-      rusak_dini: false,
-      indikasi_santri: false,
-      pemasang: 'Pak Joko'
-    },
-    {
-      id: 6,
-      fitting_id: 3,
-      tanggal: '2026-06-15',
-      alasan: 'habis_masa_pakai',
-      catatan: 'Penggantian rutin setelah masa pakai normal',
-      jenis_lama_id: 2,
-      jenis_baru_id: 2,
-      tanggal_pasang_lama: '2025-05-01',
-      usia_hari: 410,
-      rusak_dini: false,
-      indikasi_santri: false,
-      pemasang: 'Pak Joko'
-    }
-  ]
+  fitting: [],
+  stok_mutasi: [],
+  penggantian: []
 };
 
-const STORAGE_KEY = 'PANTAU_LAMPU_PESANTREN_V2';
+const STORAGE_KEY = 'PANTAU_LAMPU_PESANTREN_PROD';
 
 class DataStoreService {
   constructor() {
@@ -159,20 +44,37 @@ class DataStoreService {
 
   init() {
     try {
+      // Bersihkan cache demo/simulasi versi sebelumnya
+      localStorage.removeItem('PANTAU_LAMPU_PESANTREN');
+      localStorage.removeItem('PANTAU_LAMPU_PESANTREN_V2');
+
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         this.memory = JSON.parse(raw);
+        if (!Array.isArray(this.memory.fitting)) this.memory.fitting = [];
+        if (!Array.isArray(this.memory.stok_mutasi)) this.memory.stok_mutasi = [];
+        if (!Array.isArray(this.memory.penggantian)) this.memory.penggantian = [];
+        if (!Array.isArray(this.memory.lokasi)) this.memory.lokasi = SEED_DATA.lokasi;
+        if (!Array.isArray(this.memory.jenis_lampu)) this.memory.jenis_lampu = SEED_DATA.jenis_lampu;
       } else {
         this.resetToSeed();
       }
     } catch (e) {
-      console.warn('Gagal membaca localStorage, memakai seed memori:', e);
+      console.warn('Gagal membaca localStorage, memakai seed bersih:', e);
       this.resetToSeed();
     }
   }
 
   resetToSeed() {
     this.memory = JSON.parse(JSON.stringify(SEED_DATA));
+    this.persist();
+  }
+
+  // Bersihkan hanya data transaksi (fitting, stok, penggantian) tanpa menghapus master
+  resetDataTransaksi() {
+    this.memory.fitting = [];
+    this.memory.stok_mutasi = [];
+    this.memory.penggantian = [];
     this.persist();
   }
 

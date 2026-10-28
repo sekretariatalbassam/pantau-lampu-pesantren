@@ -164,13 +164,13 @@ async function masuk(user, isDemoMode = false) {
   } catch (e) {}
 
   App.profil = {
-    nama: isDemoMode ? 'Ust. Pengurus' : (user && user.email ? user.email.split('@')[0] : 'Petugas'),
+    nama: isDemoMode ? 'Pengurus Pesantren' : (user && user.email ? user.email.split('@')[0] : 'Petugas'),
     peran: 'admin'
   };
 
   const namaUserEl = $('#nama-user');
   if (namaUserEl) {
-    namaUserEl.textContent = isDemoMode ? '⚡ Uji Coba' : App.profil.nama;
+    namaUserEl.textContent = isDemoMode ? '👤 Pengurus' : App.profil.nama;
   }
 
   const loginView = $('#login-view');
@@ -193,12 +193,12 @@ async function init() {
     const bn = $('#brand-nama'); if (bn) bn.textContent = CONFIG.NAMA_APLIKASI;
     const bl = $('#brand-lembaga'); if (bl) bl.textContent = CONFIG.NAMA_LEMBAGA;
 
-    // Tombol Demo
+    // Tombol Demo / Masuk Cepat Siap Pakai
     const demoBtn = $('#btn-demo-mode');
     if (demoBtn) {
       demoBtn.addEventListener('click', () => {
-        masuk({ email: 'ustadz@albassam.id' }, true);
-        toast('Masuk dalam Mode Simulasi Pesantren. Silakan coba di HP Anda!');
+        masuk({ email: 'pengurus@albassam.id' }, true);
+        toast('Selamat datang di Aplikasi Pantau Lampu Pesantren!');
       });
     }
 
@@ -218,6 +218,28 @@ async function init() {
     $$('#menu-drawer-backdrop a').forEach(a => {
       a.onclick = () => tutupDrawer();
     });
+
+    const btnDrawerReset = $('#btn-drawer-reset');
+    if (btnDrawerReset) {
+      btnDrawerReset.onclick = () => {
+        tutupDrawer();
+        bukaModal('Konfirmasi Bersihkan Data', `
+          <p>Tindakan ini akan mengosongkan seluruh data <b>Titik Fitting</b>, <b>Riwayat Penggantian</b>, dan <b>Mutasi Stok</b> agar Anda bisa memulai dari nol dengan data nyata.</p>
+          <p class="text-sm muted" style="margin-top:6px;">Master Lokasi dan Jenis Lampu tidak akan dihapus.</p>
+          <div class="row-btn mt-3">
+            <button class="btn danger block" id="btn-konfirmasi-reset" type="button">🗑️ Ya, Bersihkan Semua Data</button>
+            <button class="btn block" id="btn-batal-reset" type="button">Batal</button>
+          </div>
+        `);
+        $('#btn-konfirmasi-reset').onclick = () => {
+          DataStore.resetDataTransaksi();
+          tutupModal();
+          toast('Seluruh data transaksi berhasil dibersihkan! Aplikasi siap dari nol.');
+          route();
+        };
+        $('#btn-batal-reset').onclick = tutupModal;
+      };
+    }
 
     // Supabase Connect bila kredensial tersedia
     const punyaKredensial = CONFIG.SUPABASE_URL && CONFIG.SUPABASE_URL.trim() !== '' &&

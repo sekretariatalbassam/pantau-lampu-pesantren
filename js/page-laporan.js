@@ -69,7 +69,7 @@ Pages.laporan = async function (el) {
       <p class="muted text-sm">Fitting yang sering mengalami kerusakan berulang di asrama/madrasah:</p>
 
       <div class="mobile-card-list">
-        ${titikRawan.map(r => {
+        ${titikRawan.length ? titikRawan.map(r => {
           const f = r.fitting;
           let rekomendasi = 'Pemantauan berkala.';
           if (r.karena_santri >= 2) {
@@ -98,7 +98,7 @@ Pages.laporan = async function (el) {
               </div>
             </div>
           `;
-        }).join('')}
+        }).join('') : '<div class="kosong-info" style="padding:16px;">Belum ada titik rawan tercatat. Seluruh titik lampu dalam kondisi baik.</div>'}
       </div>
     </div>
   `;

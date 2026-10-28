@@ -49,6 +49,11 @@ Pages.penggantian = async function (el, query) {
   const btnTambah = $('#btn-tambah-ganti', el);
 
   function bukaForm(fittingIdAwal = null) {
+    if (!fittingList.length) {
+      toast('Belum ada titik fitting terdaftar. Silakan buat fitting terlebih dahulu di menu Fitting.', 'warn');
+      location.hash = '#/fitting';
+      return;
+    }
     const today = new Date().toISOString().split('T')[0];
     const defaultFitting = fittingList.find(f => f.id === Number(fittingIdAwal)) || fittingList[0];
 

@@ -25,6 +25,17 @@ Pages.beranda = async function (el) {
     </div>
 
     <!-- Alert / Peringatan Segera di Layar HP -->
+    ${totalFitting === 0 ? `
+      <div class="card" style="background:#f0fdf4;border-color:#bbf7d0;margin-bottom:16px;">
+        <h3 style="color:#166534;margin-top:0;">🚀 Aplikasi Siap Digunakan!</h3>
+        <p class="text-sm" style="color:#14532d;margin:4px 0 12px;">Seluruh data simulasi telah dibersihkan. Anda sekarang siap mencatat data nyata penerangan pesantren:</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="#/fitting" class="btn small primary" style="justify-content:flex-start;">1. 💡 Daftarkan Titik Fitting Lampu</a>
+          <a href="#/stok" class="btn small" style="justify-content:flex-start;">2. 📦 Catat Stok Awal Gudang Lampu</a>
+          <a href="#/label" class="btn small" style="justify-content:flex-start;">3. 🏷️ Cetak Stiker Label QR A4 untuk Ditempel di Plafon</a>
+        </div>
+      </div>` : ''}
+
     ${nKosong > 0 ? `
       <div class="alert-box danger">
         <div class="alert-icon">⚠️</div>
@@ -123,7 +134,7 @@ Pages.beranda = async function (el) {
         </div>
         
         <div class="list-merk">
-          ${evaluasiMerk.slice(0, 3).map((m) => `
+          ${evaluasiMerk.some(m => m.total_pergantian > 0) ? evaluasiMerk.filter(m => m.total_pergantian > 0).slice(0, 3).map((m) => `
             <div class="item-merk">
               <div class="merk-nama">
                 <strong>${esc(m.merk)}</strong>
@@ -137,7 +148,7 @@ Pages.beranda = async function (el) {
                   <b>${m.rata_rata_hari}</b> <small>hari</small>
                 </div>
               </div>
-            </div>`).join('')}
+            </div>`).join('') : '<p class="muted text-sm py-2">Belum ada riwayat penggantian lampu.</p>'}
         </div>
       </div>
     </div>
