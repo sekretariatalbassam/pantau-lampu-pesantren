@@ -12,34 +12,41 @@
   --primary: #0f766e;
   --primary-dark: #0d5d57;
   --primary-light: #ccfbf1;
-  --primary-glow: rgba(15, 118, 110, 0.25);
-  --head: #134e4a;
+  --primary-glow: rgba(15, 118, 110, 0.28);
+  --head: #0f766e;
   --amber: #d97706;
   --amber-light: #fef3c7;
   --danger: #dc2626;
   --danger-light: #fee2e2;
   --ok: #16a34a;
   --ok-light: #dcfce7;
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: max(env(safe-area-inset-bottom, 0px), 8px);
+  --safe-top: max(env(safe-area-inset-top, 0px), 8px);
 }
 
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 [hidden] { display: none !important; }
 
 html {
   -webkit-text-size-adjust: 100%;
   touch-action: manipulation;
+  height: 100%;
 }
 
 body {
   margin: 0;
+  min-height: 100dvh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.5;
   color: var(--text);
   background: var(--bg);
-  padding-bottom: calc(76px + var(--safe-bottom)); /* Ruang untuk bottom nav bar */
+  padding-bottom: calc(78px + var(--safe-bottom)); /* Ruang untuk bottom nav bar */
+  overscroll-behavior-y: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4 { margin: 0 0 .4em; font-weight: 700; line-height: 1.25; color: #0f172a; }
@@ -151,21 +158,21 @@ a { color: var(--primary); text-decoration: none; }
   .desktop-nav { display: none; } /* Di HP gunakan Bottom Nav */
 }
 
-/* ----- Bottom Navigation Bar (Khusus Mobile) ----- */
+/* ----- Bottom Navigation Bar (Khusus Mobile Glassmorphism) ----- */
 .bottom-nav {
   position: fixed;
   left: 0; right: 0; bottom: 0;
-  height: calc(62px + var(--safe-bottom));
+  height: calc(64px + var(--safe-bottom));
   padding-bottom: var(--safe-bottom);
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid rgba(226, 232, 240, 0.85);
   display: flex;
   align-items: center;
   justify-content: space-around;
   z-index: 50;
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
 }
 
 .bnav-item {
@@ -174,22 +181,28 @@ a { color: var(--primary); text-decoration: none; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 3px;
   height: 100%;
   color: #64748b;
   text-decoration: none;
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 4px 0;
-  transition: all 0.15s ease;
+  padding: 6px 0;
+  transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.bnav-icon { font-size: 1.25rem; line-height: 1; }
-.bnav-label { font-size: 0.68rem; font-weight: 600; }
+.bnav-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.bnav-label { font-size: 0.7rem; font-weight: 600; }
 .bnav-item.active { color: var(--primary); }
-.bnav-item.active .bnav-icon { transform: scale(1.12); }
-.bnav-item:active { transform: scale(0.94); }
+.bnav-item.active .bnav-icon { transform: scale(1.18); }
+.bnav-item:active { transform: scale(0.92); }
 
 /* Floating Scan Button di Tengah Bottom Bar */
 .bnav-scan-fab {
@@ -200,27 +213,45 @@ a { color: var(--primary); text-decoration: none; }
   justify-content: center;
   text-decoration: none;
   color: var(--primary);
-  margin-top: -18px; /* Mengambang ke atas */
+  margin-top: -20px;
   position: relative;
   z-index: 55;
+  user-select: none;
 }
+
 .fab-circle {
-  width: 52px; height: 52px;
+  width: 54px; height: 54px;
   border-radius: 50%;
   background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
   display: grid; place-items: center;
   color: #fff;
-  box-shadow: 0 4px 14px var(--primary-glow);
-  border: 3px solid #fff;
+  box-shadow: 0 4px 16px rgba(15, 118, 110, 0.4);
+  border: 3.5px solid #fff;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  animation: fabPulse 3s infinite ease-in-out;
 }
-.fab-icon { font-size: 1.45rem; line-height: 1; }
-.bnav-scan-fab .bnav-label { font-size: 0.68rem; font-weight: 700; margin-top: 2px; color: var(--primary); }
-.bnav-scan-fab:active .fab-circle { transform: scale(0.92); }
 
-/* ----- Main Container ----- */
+@keyframes fabPulse {
+  0%, 100% { box-shadow: 0 4px 16px rgba(15, 118, 110, 0.35); }
+  50% { box-shadow: 0 6px 24px rgba(15, 118, 110, 0.65); }
+}
+
+.fab-icon { font-size: 1.5rem; line-height: 1; }
+.bnav-scan-fab .bnav-label { font-size: 0.68rem; font-weight: 700; margin-top: 3px; color: var(--primary); }
+.bnav-scan-fab:active .fab-circle { transform: scale(0.90); }
+
+/* ----- Main Container & Animasi Transisi Halus ----- */
 main#page {
-  max-width: 800px;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 16px 14px calc(24px + var(--safe-bottom));
+  animation: pageSlideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes pageSlideUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
   margin: 0 auto;
   padding: 14px 12px 24px;
 }
@@ -305,8 +336,68 @@ input:focus, select:focus, textarea:focus {
 .toolbar-grid {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   padding: 12px 14px;
+}
+
+/* ----- Filter Chips Horizontal Scrollable (Sangat Enak di HP) ----- */
+.chips-scroll-wrap {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 2px 2px 6px;
+}
+.chips-scroll-wrap::-webkit-scrollbar { display: none; }
+
+.chip {
+  padding: 7px 14px;
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1.5px solid #cbd5e1;
+  background: #fff;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.chip:active { transform: scale(0.95); }
+.chip.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+.chip.danger.active {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+}
+
+.search-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.search-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 0.95rem;
+  color: var(--muted);
+  pointer-events: none;
+}
+.search-input-wrap input {
+  padding-left: 36px;
 }
 
 /* ----- Tombol Touch-Friendly ----- */
@@ -449,6 +540,38 @@ input:focus, select:focus, textarea:focus {
   justify-content: center;
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
 }
+
+/* Garis Laser Pemindai Animasi Modern */
+.qr-laser-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #22c55e, #4ade80, #22c55e, transparent);
+  box-shadow: 0 0 16px #4ade80, 0 0 8px #22c55e;
+  animation: laserScan 2.4s ease-in-out infinite alternate;
+  z-index: 20;
+  pointer-events: none;
+}
+
+@keyframes laserScan {
+  0% { top: 8%; opacity: 0.3; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 92%; opacity: 0.3; }
+}
+
+.qr-corner-border {
+  position: absolute;
+  width: 28px; height: 28px;
+  border-color: #22c55e;
+  border-style: solid;
+  pointer-events: none;
+  z-index: 15;
+}
+.qr-corner-tl { top: 16px; left: 16px; border-width: 3.5px 0 0 3.5px; border-top-left-radius: 8px; }
+.qr-corner-tr { top: 16px; right: 16px; border-width: 3.5px 3.5px 0 0; border-top-right-radius: 8px; }
+.qr-corner-bl { bottom: 16px; left: 16px; border-width: 0 0 3.5px 3.5px; border-bottom-left-radius: 8px; }
+.qr-corner-br { bottom: 16px; right: 16px; border-width: 0 3.5px 3.5px 0; border-bottom-right-radius: 8px; }
 .qr-placeholder { text-align: center; color: #94a3b8; padding: 20px 14px; }
 .qr-big-icon { font-size: 2.8rem; display: block; margin-bottom: 8px; opacity: 0.8; }
 

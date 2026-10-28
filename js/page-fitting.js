@@ -27,17 +27,24 @@ Pages.fitting = async function (el) {
     <div id="form-box-fitting"></div>
 
     <div class="card toolbar-grid">
-      <input type="search" id="cari-fitting" placeholder="Cari kode (F-001), lokasi, merk…">
-      <select id="filter-status-fitting">
-        <option value="">Semua Status</option>
-        <option value="aktif">Aktif (Menyala)</option>
-        <option value="kosong">Kosong (Mati/Putus)</option>
-        <option value="nonaktif">Nonaktif</option>
-      </select>
-      <select id="filter-gedung-fitting">
-        <option value="">Semua Gedung</option>
-        ${[...new Set(lokasi.map(l => l.gedung))].map(g => `<option value="${esc(g)}">${esc(g)}</option>`).join('')}
-      </select>
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="search" id="cari-fitting" placeholder="Cari kode (F-001), lokasi, merk…" inputmode="search">
+      </div>
+
+      <!-- Chips Filter Status (Flick jempol ke samping di HP) -->
+      <div class="chips-scroll-wrap" id="chips-status-fitting">
+        <button type="button" class="chip active" data-val="">Semua Status</button>
+        <button type="button" class="chip" data-val="aktif">💡 Menyala</button>
+        <button type="button" class="chip danger" data-val="kosong">⚠️ Mati / Kosong</button>
+        <button type="button" class="chip" data-val="nonaktif">Nonaktif</button>
+      </div>
+
+      <!-- Chips Filter Gedung -->
+      <div class="chips-scroll-wrap" id="chips-gedung-fitting">
+        <button type="button" class="chip active" data-val="">Semua Gedung</button>
+        ${[...new Set(lokasi.map(l => l.gedung))].map(g => `<button type="button" class="chip" data-val="${esc(g)}">🏛️ ${esc(g)}</button>`).join('')}
+      </div>
     </div>
 
     <div id="bar-massal" class="card bar-massal" hidden></div>
@@ -47,13 +54,32 @@ Pages.fitting = async function (el) {
   const formBox = $('#form-box-fitting', el);
   const daftar = $('#daftar-fitting', el);
   const cariInput = $('#cari-fitting', el);
-  const statusFilter = $('#filter-status-fitting', el);
-  const gedungFilter = $('#filter-gedung-fitting', el);
+
+  let filterStatus = '';
+  let filterGedung = '';
+
+  $$('#chips-status-fitting .chip', el).forEach(btn => {
+    btn.onclick = () => {
+      $$('#chips-status-fitting .chip', el).forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterStatus = btn.dataset.val;
+      gambarDaftar();
+    };
+  });
+
+  $$('#chips-gedung-fitting .chip', el).forEach(btn => {
+    btn.onclick = () => {
+      $$('#chips-gedung-fitting .chip', el).forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterGedung = btn.dataset.val;
+      gambarDaftar();
+    };
+  });
 
   function gambarDaftar() {
     const kata = cariInput.value.trim().toLowerCase();
-    const status = statusFilter.value;
-    const gedung = gedungFilter.value;
+    const status = filterStatus;
+    const gedung = filterGedung;
 
     tampil = semua.filter(f => {
       const matchKata = !kata || [
@@ -373,8 +399,6 @@ Pages.fitting = async function (el) {
   };
 
   cariInput.oninput = gambarDaftar;
-  statusFilter.onchange = gambarDaftar;
-  gedungFilter.onchange = gambarDaftar;
 
   $('#btn-tambah-fitting', el).onclick = () => bukaFormSingle();
   $('#btn-tambah-banyak', el).onclick = () => bukaFormBuatBanyak();

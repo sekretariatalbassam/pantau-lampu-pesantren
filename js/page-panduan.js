@@ -179,3 +179,4 @@ Pages.panduan = async function (el) {
   $('#btn-panduan-dl-lokasi', el).onclick = () => ExportImport.downloadTemplateLokasi();
   $('#btn-panduan-dl-fitting', el).onclick = () => ExportImport.downloadTemplateFitting();
 };
+

@@ -27,6 +27,11 @@ Pages.scan = async function (el, query) {
 
       <div id="qr-reader-container" class="qr-viewport">
         <div id="qr-reader" style="width: 100%;"></div>
+        <div class="qr-laser-line" id="qr-laser-beam" hidden></div>
+        <div class="qr-corner-border qr-corner-tl"></div>
+        <div class="qr-corner-border qr-corner-tr"></div>
+        <div class="qr-corner-border qr-corner-bl"></div>
+        <div class="qr-corner-border qr-corner-br"></div>
         <div id="qr-placeholder" class="qr-placeholder">
           <span class="qr-big-icon">📷</span>
           <p>Ketuk <b>Mulai Kamera</b> untuk mengaktifkan pemindai di HP Anda.</p>
@@ -76,6 +81,8 @@ Pages.scan = async function (el, query) {
       }
 
       qrPlaceholder.hidden = true;
+      const laserBeam = $('#qr-laser-beam', el);
+      if (laserBeam) laserBeam.hidden = false;
       btnToggleCam.textContent = 'Matikan';
       btnToggleCam.className = 'btn small danger';
 
@@ -114,6 +121,8 @@ Pages.scan = async function (el, query) {
       isScanning = false;
     }
     qrPlaceholder.hidden = false;
+    const laserBeam = $('#qr-laser-beam', el);
+    if (laserBeam) laserBeam.hidden = true;
     btnToggleCam.textContent = 'Mulai Kamera';
     btnToggleCam.className = 'btn small primary';
   }

@@ -18,8 +18,16 @@ const kodeDariNomor = (n) => 'F-' + String(n).padStart(3, '0');
 const nomorKode = (kode) => parseInt(String(kode).replace(/\D/g, ''), 10) || 0;
 const urutKode = (a, b) => nomorKode(a.kode) - nomorKode(b.kode);
 
+// Umpan Balik Getar Sentuhan Mobile (Micro-Haptic Feedback)
+function hapticTap(pola = 12) {
+  if (typeof navigator !== 'undefined' && navigator.vibrate) {
+    try { navigator.vibrate(pola); } catch (e) {}
+  }
+}
+
 // Suara Beep Scanner
 function bunyiBeep(tipe = 'ok') {
+  hapticTap(tipe === 'ok' ? [30, 40, 50] : [50, 50, 50]);
   try {
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     if (!AudioCtx) return;
@@ -39,6 +47,7 @@ function bunyiBeep(tipe = 'ok') {
 
 let toastTimer;
 function toast(pesan, tipe = 'ok') {
+  hapticTap(tipe === 'err' ? [30, 50, 30] : 15);
   const t = $('#toast');
   if (!t) return;
   t.textContent = pesan;
@@ -311,6 +320,13 @@ async function init() {
     }
 
     window.addEventListener('hashchange', route);
+
+    // Global Micro-Haptic Touch Feedback di Layar HP
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.btn, .bnav-item, .chip, .drawer-item, .mcard-item, #btn-demo-mode, .stat-card')) {
+        hapticTap(10);
+      }
+    }, { passive: true });
 
     // Langsung buka aplikasi dalam mode demo pesantren (instan & siap pakai)
     let previousAuth = null;

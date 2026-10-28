@@ -57,43 +57,43 @@ Pages.beranda = async function (el) {
         <a href="#/laporan" class="btn small">Cek</a>
       </div>` : ''}
 
-    <!-- 4 Kartu Statistik Ringkas -->
+    <!-- 4 Kartu Statistik Ringkas (Bisa Ditekan di HP) -->
     <div class="stats-grid">
-      <div class="stat-card">
+      <a href="#/fitting" class="stat-card" style="text-decoration:none;color:inherit;">
         <div class="stat-meta">
           <span class="stat-title">Fitting</span>
           <span class="stat-badge info">${totalFitting}</span>
         </div>
         <b class="stat-value text-primary">${totalFitting}</b>
-        <span class="stat-sub">Titik dudukan berlabel</span>
-      </div>
+        <span class="stat-sub">Titik dudukan berlabel &rsaquo;</span>
+      </a>
 
-      <div class="stat-card">
+      <a href="#/fitting" class="stat-card" style="text-decoration:none;color:inherit;">
         <div class="stat-meta">
           <span class="stat-title">Menyala</span>
           <span class="stat-badge ok">${nAktif}</span>
         </div>
         <b class="stat-value text-ok">${nAktif}</b>
-        <span class="stat-sub">${Math.round((nAktif / (totalFitting || 1)) * 100)}% penerangan aktif</span>
-      </div>
+        <span class="stat-sub">${Math.round((nAktif / (totalFitting || 1)) * 100)}% penerangan aktif &rsaquo;</span>
+      </a>
 
-      <div class="stat-card">
+      <a href="#/laporan" class="stat-card" style="text-decoration:none;color:inherit;">
         <div class="stat-meta">
           <span class="stat-title">Ulah Santri</span>
           <span class="stat-badge danger">${nSantri}</span>
         </div>
         <b class="stat-value text-danger">${nSantri}</b>
-        <span class="stat-sub">Lampu pecah / fiting lepas</span>
-      </div>
+        <span class="stat-sub">Lampu pecah/lepas &rsaquo;</span>
+      </a>
 
-      <div class="stat-card">
+      <a href="#/stok" class="stat-card" style="text-decoration:none;color:inherit;">
         <div class="stat-meta">
           <span class="stat-title">Stok Gudang</span>
           <span class="stat-badge">${stok.reduce((acc, s) => acc + s.sisa, 0)}</span>
         </div>
         <b class="stat-value text-amber">${stok.reduce((acc, s) => acc + s.sisa, 0)}</b>
-        <span class="stat-sub">Pcs lampu siap pakai</span>
-      </div>
+        <span class="stat-sub">Pcs lampu siap pakai &rsaquo;</span>
+      </a>
     </div>
 
     <!-- Tombol Akses Cepat Mobile -->
