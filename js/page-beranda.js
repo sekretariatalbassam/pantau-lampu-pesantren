@@ -33,6 +33,7 @@ Pages.beranda = async function (el) {
           <a href="#/fitting" class="btn small primary" style="justify-content:flex-start;">1. 💡 Daftarkan Titik Fitting Lampu</a>
           <a href="#/stok" class="btn small" style="justify-content:flex-start;">2. 📦 Catat Stok Awal Gudang Lampu</a>
           <a href="#/label" class="btn small" style="justify-content:flex-start;">3. 🏷️ Cetak Stiker Label QR A4 untuk Ditempel di Plafon</a>
+          <a href="#/panduan" class="btn small" style="justify-content:flex-start;background:#e0e7ff;color:#4338ca;border-color:#c7d2fe;">4. 📖 Baca Panduan & SOP Penggunaan</a>
         </div>
       </div>` : ''}
 

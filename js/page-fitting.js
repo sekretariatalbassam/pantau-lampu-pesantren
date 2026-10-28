@@ -16,9 +16,11 @@ Pages.fitting = async function (el) {
         <h2>💡 Titik Dudukan Lampu</h2>
         <p class="muted text-sm">Daftar fitting dan lampu terpasang di pesantren.</p>
       </div>
-      <div class="row-btn">
+      <div class="row-btn" style="flex-wrap:wrap;">
         <button class="btn primary small" id="btn-tambah-fitting" type="button">+ Tambah</button>
         <button class="btn small" id="btn-tambah-banyak" type="button">+ Buat Banyak</button>
+        <button class="btn small" id="btn-import-fitting" type="button">📥 Import</button>
+        <button class="btn small" id="btn-export-fitting" type="button">📤 Export</button>
       </div>
     </div>
 
@@ -376,6 +378,23 @@ Pages.fitting = async function (el) {
 
   $('#btn-tambah-fitting', el).onclick = () => bukaFormSingle();
   $('#btn-tambah-banyak', el).onclick = () => bukaFormBuatBanyak();
+
+  const btnImport = $('#btn-import-fitting', el);
+  if (btnImport) {
+    btnImport.onclick = () => {
+      ExportImport.importFittingModal(async () => {
+        semua = await DataStore.getFitting();
+        gambarDaftar();
+      });
+    };
+  }
+
+  const btnExport = $('#btn-export-fitting', el);
+  if (btnExport) {
+    btnExport.onclick = () => {
+      ExportImport.exportFitting();
+    };
+  }
 
   gambarDaftar();
 };

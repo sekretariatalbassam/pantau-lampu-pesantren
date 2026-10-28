@@ -48,13 +48,20 @@ function buatHalamanCrud(cfg) {
           <h2>${esc(cfg.judul)}</h2>
           ${cfg.bantuan ? `<p class="muted text-sm">${cfg.bantuan}</p>` : ''}
         </div>
-        <button class="btn primary small" id="btn-tambah" type="button">+ Tambah</button>
+        <div class="row-btn" style="flex-wrap:wrap;">
+          <button class="btn primary small" id="btn-tambah" type="button">+ Tambah</button>
+          ${cfg.extraButtonsHtml || ''}
+        </div>
       </div>
       <div id="form-box"></div>
       <div id="daftar"></div>`;
 
     const formBox = $('#form-box', el);
     const daftar = $('#daftar', el);
+
+    if (typeof cfg.initExtra === 'function') {
+      cfg.initExtra(el, () => muat());
+    }
 
     async function muat() {
       if (DataStore.isSupabaseLive()) {

@@ -4,10 +4,21 @@
 
 Pages.lokasi = buatHalamanCrud({
   table: 'lokasi',
-  judul: 'Lokasi',
+  judul: 'Master Lokasi Pesantren',
   tunggal: 'lokasi',
   urut: ['gedung', 'lantai', 'ruang'],
-  bantuan: 'Tempat fitting dipasang. Contoh: <b>Gedung A</b> › Lantai <b>2</b> › Ruang <b>Kelas 2B</b>.',
+  bantuan: 'Tempat fitting dipasang di pesantren. Bisa diekspor/diimpor via file Excel atau CSV.',
+  extraButtonsHtml: `
+    <button class="btn small" id="btn-import-lokasi" type="button">📥 Import CSV</button>
+    <button class="btn small" id="btn-export-lokasi" type="button">📤 Export CSV</button>
+  `,
+  initExtra: (el, muatUlang) => {
+    const btnImp = $('#btn-import-lokasi', el);
+    if (btnImp) btnImp.onclick = () => ExportImport.importLokasiModal(muatUlang);
+
+    const btnExp = $('#btn-export-lokasi', el);
+    if (btnExp) btnExp.onclick = () => ExportImport.exportLokasi();
+  },
   fields: [
     { key: 'gedung', label: 'Area / Gedung', required: true, placeholder: 'mis. Gedung A, Masjid, Asrama Putra' },
     { key: 'lantai', label: 'Lantai', placeholder: 'mis. 1, 2, Dasar' },
